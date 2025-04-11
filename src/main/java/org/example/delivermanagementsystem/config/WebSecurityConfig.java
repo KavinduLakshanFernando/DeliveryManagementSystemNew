@@ -53,8 +53,17 @@ public class WebSecurityConfig {
                         .requestMatchers(
                                 "/api/v1/auth/authenticate",
                                 "/api/v1/user/register",
+                                "/api/v1/user/getUsers",
+                                "/api/v1/driver/delete/{id}",
+                                "/api/v1/driver/customer/{id}",
                                 "/api/v1/auth/refreshToken",
                                 "api/v1/driver/save",
+                                "api/v1/driver/allDrivers",
+                                "api/v1/customer/allCustomers",
+                                "api/v1/vehicle/allVehicles",
+                                "api/v1/customer/save",
+                                "api/v1/vehicle/save",
+                                "/api/v1/orders/save",
                                 "/v3/api-docs/**",
                                 "/swagger-ui/**",
                                 "/swagger-ui.html").permitAll()

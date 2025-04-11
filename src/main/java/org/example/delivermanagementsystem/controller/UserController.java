@@ -4,7 +4,6 @@ import jakarta.validation.Valid;
 import org.example.delivermanagementsystem.dto.AuthDTO;
 import org.example.delivermanagementsystem.dto.ResponseDTO;
 import org.example.delivermanagementsystem.dto.UserDTO;
-import org.example.delivermanagementsystem.entity.User;
 import org.example.delivermanagementsystem.service.UserService;
 import org.example.delivermanagementsystem.utill.JwtUtil;
 import org.example.delivermanagementsystem.utill.VarList;
@@ -60,7 +59,7 @@ public class UserController {
         }
     }
 
-    @PreAuthorize("hasAnyAuthority('ADMIN')")
+//    @PreAuthorize("hasAnyAuthority('ADMIN')")
     @GetMapping(value = "/getUsers")
     public List<UserDTO> getAllUsers() {
         try {
@@ -70,7 +69,7 @@ public class UserController {
         }
     }
 
-    @PreAuthorize("hasAnyAuthority('ADMIN')")
+//    @PreAuthorize("hasAnyAuthority('ADMIN')")
     @DeleteMapping(value = "/delete/{email}")
     public ResponseEntity<ResponseDTO> deleteUser(@PathVariable String email) {
         try {

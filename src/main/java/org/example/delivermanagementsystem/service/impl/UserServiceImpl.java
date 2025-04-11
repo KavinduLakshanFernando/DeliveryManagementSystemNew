@@ -1,6 +1,7 @@
 package org.example.delivermanagementsystem.service.impl;
 
 import org.example.delivermanagementsystem.dto.UserDTO;
+import org.example.delivermanagementsystem.entity.Customer;
 import org.example.delivermanagementsystem.entity.User;
 import org.example.delivermanagementsystem.repo.UserRepository;
 import org.example.delivermanagementsystem.service.UserService;
@@ -89,7 +90,6 @@ public class UserServiceImpl implements UserDetailsService, UserService {
             System.out.println("save2"+userDTO);
             BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
             userDTO.setPassword(passwordEncoder.encode(userDTO.getPassword()));
-            userDTO.setRole("USER");
             userRepository.save(modelMapper.map(userDTO, User.class));
             return VarList.Created;
         }

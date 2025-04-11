@@ -1,16 +1,21 @@
 package org.example.delivermanagementsystem.dto;
 
+import jakarta.persistence.OneToOne;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.example.delivermanagementsystem.entity.User;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 public class DriverDTO {
+
+    private UUID DID;
 
     @NotBlank(message = "First name is required")
     @Size(min = 2, max = 50)
@@ -20,24 +25,10 @@ public class DriverDTO {
     @Size(min = 2, max = 50)
     private String lastName;
 
-    @Email(message = "Invalid email")
-    @NotBlank(message = "Email is required")
-    private String email;
-
-    @NotBlank(message = "Phone number is required")
-    @Pattern(regexp = "\\d{10,15}", message = "Phone must be 10 to 15 digits")
-    private String phone;
-
     @NotNull(message = "Date of birth is required")
-    private LocalDate dateOfBirth;
+    private String dateOfBirth;
 
     private String gender;
-
-    @NotBlank(message = "Password is required")
-    private String password;
-
-    @NotBlank(message = "Confirm password is required")
-    private String confirmPassword;
 
     @NotBlank(message = "Street address is required")
     @Size(min = 5, max = 100)
@@ -56,7 +47,7 @@ public class DriverDTO {
     private String licenseState;
 
     @NotNull(message = "License expiry date is required")
-    private LocalDate licenseExpiry;
+    private String licenseExpiry;
 
     @NotBlank(message = "License class is required")
     private String licenseClass;
@@ -72,6 +63,5 @@ public class DriverDTO {
     @AssertTrue(message = "You must agree to the terms")
     private boolean termsAgreement;
 
-    private String rol = "DRIVER";
-
+    private User user;
 }
