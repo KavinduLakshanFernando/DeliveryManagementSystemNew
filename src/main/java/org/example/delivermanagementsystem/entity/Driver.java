@@ -51,8 +51,6 @@ public class Driver {
 
     private String preferredArea;
 
-    private boolean termsAgreement;
-
     @OneToOne(orphanRemoval = true)
     @JoinColumn(name = "user_id", referencedColumnName = "uid")
     private User user;

@@ -20,14 +20,18 @@ public class UserDTO {
     @Email(message = "Email should be valid")
     private String email;
 
+    @NotNull(message = "Password is required")
     private String password;
 
-
+    @NotNull(message = "Comfirm Password is required")
     private String role;
 
     private String Status;
 
+    @NotNull(message = "Number is required")
     private String phone;
+
+
 
 
 }

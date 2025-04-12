@@ -25,7 +25,7 @@ public class DriverManageController {
     public DriverManageController(DriverService driverService) {
         this.driverService = driverService;
     }
-
+    @PreAuthorize("hasAnyAuthority('DRIVER')")
     @PostMapping("/save")
     public ResponseEntity<ResponseDTO> saveDriver(@RequestBody @Valid DriverDTO driverDTO) {
         try {

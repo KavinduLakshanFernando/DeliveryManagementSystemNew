@@ -17,10 +17,10 @@ public class PlaceOrderDTO {
     private String deliveryAddress;
     private double distance;
     private String vehicleType;
-    private String description;
     private String deliveryDate;
     private double deliveryAmount;
     private String status;
     private String priority;
     private Customer customer;
+    private String receiverContact;
 }

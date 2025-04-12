@@ -8,7 +8,11 @@ import org.example.delivermanagementsystem.service.PlaceOrderService;
 import org.example.delivermanagementsystem.utill.VarList;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.UUID;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:63342/")
@@ -18,6 +22,7 @@ public class OrderController {
 
     private final PlaceOrderService orderService;
 
+    @PreAuthorize("hasAnyAuthority('CUSTOMER')")
     @PostMapping("/save")
     public ResponseEntity<ResponseDTO> saveOrder(@RequestBody @Valid PlaceOrderDTO placeOrderDTO) {
         System.out.println(placeOrderDTO);
@@ -34,6 +39,19 @@ public class OrderController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(new ResponseDTO(VarList.Internal_Server_Error, e.getMessage(), placeOrderDTO));
         }
+    }
+
+    @PreAuthorize("hasAnyAuthority('DRIVER')")
+    @GetMapping("/pendingOrders")
+    public List<PlaceOrderDTO> getPendingOrders() {
+        return orderService.getPendingOrders();
+    }
+
+    @PutMapping("/{id}/confirm")
+    public ResponseEntity<ResponseDTO> confirmOrder(@PathVariable UUID id) {
+        orderService.confirmOrder(id);
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(new ResponseDTO(VarList.OK, "Success", id));
     }
 
 }

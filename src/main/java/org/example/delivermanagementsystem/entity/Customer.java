@@ -1,5 +1,6 @@
 package org.example.delivermanagementsystem.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
@@ -42,7 +43,9 @@ public class Customer {
 
 
     @OneToMany(mappedBy = "customer" ,cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<PlaceOrder> orders;
+    
 
 
 }

@@ -25,7 +25,7 @@ public class DriverDTO {
     @Size(min = 2, max = 50)
     private String lastName;
 
-    @NotNull(message = "Date of birth is required")
+//    @NotNull(message = "Date of birth is required")
     private String dateOfBirth;
 
     private String gender;
@@ -59,9 +59,6 @@ public class DriverDTO {
     private String availability;
 
     private String preferredArea;
-
-    @AssertTrue(message = "You must agree to the terms")
-    private boolean termsAgreement;
 
     private User user;
 }

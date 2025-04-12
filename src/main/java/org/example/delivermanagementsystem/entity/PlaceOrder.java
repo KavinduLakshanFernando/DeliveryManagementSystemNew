@@ -23,11 +23,11 @@ public class PlaceOrder {
     private String deliveryAddress;
     private double distance;
     private String vehicleType;
-    private String description;
     private String deliveryDate;
     private double deliveryAmount;
     private String status;
     private String priority;
+    private String receiverContact;
 
     @ManyToOne
     private Customer customer;
