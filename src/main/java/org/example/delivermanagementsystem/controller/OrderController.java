@@ -22,7 +22,7 @@ public class OrderController {
 
     private final PlaceOrderService orderService;
 
-    @PreAuthorize("hasAnyAuthority('CUSTOMER')")
+//    @PreAuthorize("hasAnyAuthority('CUSTOMER')")
     @PostMapping("/save")
     public ResponseEntity<ResponseDTO> saveOrder(@RequestBody @Valid PlaceOrderDTO placeOrderDTO) {
         System.out.println(placeOrderDTO);

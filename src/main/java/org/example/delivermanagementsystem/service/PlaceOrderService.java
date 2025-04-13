@@ -12,4 +12,5 @@ public interface PlaceOrderService {
     List<PlaceOrderDTO> getPendingOrders();
 
     void confirmOrder(UUID id);
+
 }

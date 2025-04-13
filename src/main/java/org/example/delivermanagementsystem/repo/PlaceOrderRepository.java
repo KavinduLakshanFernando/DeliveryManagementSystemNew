@@ -9,4 +9,6 @@ import java.util.UUID;
 
 public interface PlaceOrderRepository extends JpaRepository<PlaceOrder, UUID> {
     List<PlaceOrder> findAllByStatus(String pending);
+
+
 }
