@@ -37,7 +37,7 @@ public class Customer {
 
     private String city;
 
-    @OneToOne
+    @OneToOne(orphanRemoval = true)
     @JoinColumn(name = "user_id",referencedColumnName = "uid")
     private User user;
 

@@ -14,28 +14,20 @@ import java.util.UUID;
 @AllArgsConstructor
 public class VehicleDTO {
     private UUID vid;
-    @NotBlank
+
     private String vehicleType;
 
-    @NotBlank
     private String vehicleModel;
 
-    @Min(1990)
-    @Max(2030)
     private int vehicleYear;
 
     private String vehicleColor;
 
-    @NotBlank
+
     private String licensePlate;
 
-    @NotNull
     private LocalDate insuranceExpiry;
 
-    @AssertTrue(message = "You must agree to the terms")
-    private boolean termsAgreement;
-
-    @ManyToOne
     private Driver driver;
 }
 

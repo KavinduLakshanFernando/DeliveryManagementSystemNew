@@ -12,6 +12,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @CrossOrigin(origins = "http://localhost:63342/")
 @RestController
@@ -45,6 +46,7 @@ public class CustomerController {
         }
     }
 
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     @GetMapping("/allCustomers")
     public ResponseEntity<List<CustomerDTO>> getAllCustomers() {
         try {
@@ -56,6 +58,36 @@ public class CustomerController {
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.internalServerError().build();
+        }
+    }
+
+    @PreAuthorize("hasAnyAuthority('CUSTOMER')")
+    @GetMapping("/getPersonalData/{userId}")
+    public ResponseEntity<List<CustomerDTO>> getPersonalDataByUserId(@PathVariable UUID userId) {
+        List<CustomerDTO> customersByUserId = customerService.getCustomersByUserId(userId);
+        if (customersByUserId.isEmpty())
+            return ResponseEntity.noContent().build();
+        return ResponseEntity.ok(customersByUserId);
+    }
+
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
+    @DeleteMapping("/delete/{cid}")
+    public ResponseEntity<ResponseDTO> deleteCustomer(@PathVariable UUID cid) {
+        try {
+            int res = customerService.deleteCustomer(cid);
+            switch (res) {
+                case VarList.OK -> {
+                    return ResponseEntity.status(HttpStatus.OK)
+                            .body(new ResponseDTO(VarList.OK, "Success", cid));
+                }
+                default -> {
+                    return ResponseEntity.status(HttpStatus.BAD_GATEWAY)
+                            .body(new ResponseDTO(VarList.Bad_Gateway, "Error", cid));
+                }
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ResponseDTO(VarList.Internal_Server_Error, e.getMessage(), cid));
         }
     }
 }

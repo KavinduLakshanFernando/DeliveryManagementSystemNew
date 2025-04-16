@@ -13,4 +13,7 @@ public interface PlaceOrderService {
 
     void confirmOrder(UUID id);
 
+    List<PlaceOrderDTO> getAllOrders();
+
+    List<PlaceOrderDTO> getOrdersByCustomerId(UUID cid);
 }

@@ -42,9 +42,6 @@ public class Vehicle {
 //    @Future(message = "Insurance expiry date must be in the future")
     private String insuranceExpiry;
 
-//    @AssertTrue(message = "You must agree to the terms")
-    private boolean termsAgreement;
-
     @ManyToOne
     private Driver driver;
 

@@ -46,6 +46,7 @@ public class DriverManageController {
         }
         }
 
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     @GetMapping("/allDrivers")
     public ResponseEntity<List<DriverDTO>> getAllDrivers() {
         try {
@@ -60,6 +61,7 @@ public class DriverManageController {
         }
     }
 
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<ResponseDTO> deleteDriver(@PathVariable UUID id) {
         try {

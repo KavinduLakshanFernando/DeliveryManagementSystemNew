@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class PlaceOrderServiceImpl implements PlaceOrderService {
@@ -40,6 +41,21 @@ public class PlaceOrderServiceImpl implements PlaceOrderService {
         placeOrder.setStatus("CONFIRMED");
         placeOrderRepository.save(placeOrder);
     }
+
+    @Override
+    public List<PlaceOrderDTO> getAllOrders() {
+        return modelMapper.map(placeOrderRepository.findAll(), new TypeToken<List<PlaceOrderDTO>>() {}.getType());
+    }
+
+
+    @Override
+    public List<PlaceOrderDTO> getOrdersByCustomerId(UUID cid) {
+        List<PlaceOrder> orders = placeOrderRepository.findByCustomer_cid(cid);
+        return orders.stream()
+                .map(order -> modelMapper.map(order, PlaceOrderDTO.class))
+                .collect(Collectors.toList());
+    }
+
 
 
 }

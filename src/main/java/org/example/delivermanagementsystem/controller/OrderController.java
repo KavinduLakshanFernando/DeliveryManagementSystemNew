@@ -22,7 +22,7 @@ public class OrderController {
 
     private final PlaceOrderService orderService;
 
-//    @PreAuthorize("hasAnyAuthority('CUSTOMER')")
+    @PreAuthorize("hasAnyAuthority('CUSTOMER')")
     @PostMapping("/save")
     public ResponseEntity<ResponseDTO> saveOrder(@RequestBody @Valid PlaceOrderDTO placeOrderDTO) {
         System.out.println(placeOrderDTO);
@@ -53,5 +53,19 @@ public class OrderController {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(new ResponseDTO(VarList.OK, "Success", id));
     }
+
+    @PreAuthorize("hasAnyAuthority('DRIVER', 'CUSTOMER')")
+    @GetMapping("/allOrders")
+    public List<PlaceOrderDTO> getAllOrders() {
+        return orderService.getAllOrders();
+    }
+
+    @GetMapping("/getUserOrder/{cid}")
+    public  List<PlaceOrderDTO> getOrder(@PathVariable UUID cid) {
+
+        return orderService.getOrdersByCustomerId(cid);
+
+    }
+
 
 }

@@ -6,7 +6,7 @@ import org.example.delivermanagementsystem.dto.VehicleDTO;
 import java.util.List;
 
 public interface VehicleService {
-    int saveVehicle(@Valid VehicleDTO vehicleDTO);
+    int saveVehicle( VehicleDTO vehicleDTO);
 
     List<VehicleDTO> getAllVehicles();
 }

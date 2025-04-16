@@ -3,6 +3,7 @@ package org.example.delivermanagementsystem.controller;
 import org.example.delivermanagementsystem.dto.AuthDTO;
 import org.example.delivermanagementsystem.dto.ResponseDTO;
 import org.example.delivermanagementsystem.dto.UserDTO;
+import org.example.delivermanagementsystem.entity.StatusProfile;
 import org.example.delivermanagementsystem.service.impl.UserServiceImpl;
 import org.example.delivermanagementsystem.utill.JwtUtil;
 import org.example.delivermanagementsystem.utill.VarList;
@@ -51,6 +52,8 @@ public class AuthController {
             return ResponseEntity.status(HttpStatus.CONFLICT)
                     .body(new ResponseDTO(VarList.Conflict, "Authorization Failure! Please Try Again", null));
         }
+
+
 
         AuthDTO authDTO = new AuthDTO();
         authDTO.setEmail(loadedUser.getEmail());

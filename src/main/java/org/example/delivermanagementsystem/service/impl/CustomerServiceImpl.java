@@ -50,4 +50,18 @@ public class CustomerServiceImpl implements CustomerService {
                 .map(customer -> modelMapper.map(customer, CustomerDTO.class))
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public List<CustomerDTO> getCustomersByUserId(UUID userId) {
+        List<Customer> customers = customerRepository.findByUser_Uid(userId);
+        return customers.stream()
+                .map(customer -> modelMapper.map(customer, CustomerDTO.class))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public int deleteCustomer(UUID cid) {
+        customerRepository.deleteById(cid);
+        return VarList.OK;
+    }
 }

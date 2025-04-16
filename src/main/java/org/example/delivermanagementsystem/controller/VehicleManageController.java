@@ -7,6 +7,7 @@ import org.example.delivermanagementsystem.service.VehicleService;
 import org.example.delivermanagementsystem.utill.VarList;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,8 +23,9 @@ public class VehicleManageController {
         this.vehicleService = vehicleService;
     }
 
+    @PreAuthorize("hasAnyAuthority('DRIVER')")
     @PostMapping("/save")
-    public ResponseEntity<ResponseDTO> saveVehicle(@RequestBody @Valid VehicleDTO vehicleDTO) {
+    public ResponseEntity<ResponseDTO> saveVehicle(@RequestBody  VehicleDTO vehicleDTO) {
         System.out.println(vehicleDTO);
         try {
             int res = vehicleService.saveVehicle(vehicleDTO);
